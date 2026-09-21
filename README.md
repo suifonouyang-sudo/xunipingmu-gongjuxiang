@@ -33,6 +33,16 @@ App 共 8 个页面：
 
 ---
 
+## 直接安装
+
+仓库根目录已附带编译好的安装包，不想自己编译的话下载即可：
+
+- **[VirtualScreenToolbox-v1.0-debug.apk](VirtualScreenToolbox-v1.0-debug.apk)**（3.4 MB，debug 签名）
+
+安装时需在系统里允许「安装未知来源应用」。装完记得先开 Shizuku，再到 **授权检查** 页逐项授权。
+
+---
+
 ## 环境要求
 
 - **设备**：Android 7.0 (API 24) 及以上
