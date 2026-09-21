@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg"
+    android:orientation="vertical"
+    android:padding="14dp">
+
+    <!-- 恢复源 -->
+    <LinearLayout style="@style/Card">
+        <TextView
+            style="@style/CardLabel"
+            android:text="恢复源" />
+        <EditText
+            android:id="@+id/etRestoreDir"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_input"
+            android:fontFamily="monospace"
+            android:hint="备份所在目录（长按恢复默认）"
+            android:inputType="text"
+            android:minHeight="42dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:textColor="@color/text_main"
+            android:textColorHint="@color/text_sub"
+            android:textSize="13sp" />
+        <TextView
+            android:id="@+id/tvRestoreMode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_input"
+            android:fontFamily="monospace"
+            android:padding="8dp"
+            android:text="检测中…"
+            android:textColor="@color/text_main"
+            android:textSize="12sp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/btnRestoreRefresh"
+                style="@style/BtnPrimary"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="读取备份记录" />
+            <TextView
+                android:id="@+id/btnRestoreRetest"
+                style="@style/BtnOutline"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:text="重测 root" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- 备份记录 -->
+    <LinearLayout
+        style="@style/Card"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/tvRestoreCount"
+                style="@style/CardLabel"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_marginBottom="0dp"
+                android:text="备份记录" />
+            <TextView
+                android:id="@+id/btnRestoreOnlyData"
+                style="@style/BtnMini"
+                android:background="@drawable/bg_seg"
+                android:text="仅含数据"
+                android:textColor="@drawable/seg_text_color" />
+        </LinearLayout>
+        <ListView
+            android:id="@+id/lvRestores"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:divider="@null"
+            android:dividerHeight="0dp" />
+    </LinearLayout>
+
+    <!-- 操作结果 -->
+    <LinearLayout style="@style/Card">
+        <TextView
+            android:id="@+id/tvRestoreResult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_input"
+            android:fontFamily="monospace"
+            android:maxLines="9"
+            android:minHeight="44dp"
+            android:padding="8dp"
+            android:scrollbars="vertical"
+            android:text="—"
+            android:textColor="@color/text_main"
+            android:textSize="12sp" />
+        <TextView
+            style="@style/CardHint"
+            android:text="点记录看详情；行内[恢复]会先装回安装包，有 root 且备份含数据时再覆盖应用数据。恢复前会强制停止该应用。" />
+    </LinearLayout>
+
+</LinearLayout>

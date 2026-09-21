@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg"
+    android:fillViewport="true"
+    android:padding="14dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout style="@style/Card">
+            <TextView
+                style="@style/CardLabel"
+                android:text="操作目标（分辨率 / DPI / 旋转作用于该屏，点一行选中）" />
+            <LinearLayout
+                android:id="@+id/lvTargets"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:orientation="vertical" />
+            <TextView
+                android:id="@+id/tvTarget"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="目标：—"
+                android:textColor="@color/text_main"
+                android:textSize="14sp" />
+            <TextView
+                android:id="@+id/btnTargetRefresh"
+                style="@style/BtnOutline"
+                android:layout_marginTop="10dp"
+                android:text="重新扫描显示屏" />
+            <TextView
+                style="@style/CardHint"
+                android:text="列出全部显示屏（内置屏 / overlay 虚拟屏 / 第三方虚拟屏如 scrcpy）。分辨率与 DPI 走 wm size|density -d N，可精确作用到选中的屏而不影响其他屏；旋转受系统版本限制，见下方旋转卡片。系统栏显隐是全局开关，不受此处影响。" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/Card">
+            <TextView
+                style="@style/CardLabel"
+                android:text="当前显示参数 (wm size / wm density)" />
+            <TextView
+                android:id="@+id/tvWmState"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:text="—"
+                android:textColor="@color/text_main"
+                android:textSize="13sp" />
+            <TextView
+                android:id="@+id/btnRefreshWm"
+                style="@style/BtnOutline"
+                android:layout_marginTop="10dp"
+                android:text="刷新" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/Card">
+            <TextView
+                style="@style/CardLabel"
+                android:text="修改分辨率" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <EditText
+                    android:id="@+id/etWidth2"
+                    style="@style/EtNum"
+                    android:layout_weight="1"
+                    android:hint="宽 1280" />
+                <TextView
+                    style="@style/EtSep"
+                    android:text="×" />
+                <EditText
+                    android:id="@+id/etHeight2"
+                    style="@style/EtNum"
+                    android:layout_weight="1"
+                    android:hint="高 720" />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/btnApplySize"
+                style="@style/BtnPrimary"
+                android:layout_marginTop="10dp"
+                android:text="应用分辨率" />
+            <TextView
+                android:id="@+id/btnResetSize"
+                style="@style/BtnOutline"
+                android:layout_marginTop="8dp"
+                android:text="重置分辨率" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/Card">
+            <TextView
+                style="@style/CardLabel"
+                android:text="修改 DPI" />
+            <EditText
+                android:id="@+id/etDpi2"
+                style="@style/EtNum"
+                android:layout_width="match_parent"
+                android:hint="DPI 240" />
+            <TextView
+                android:id="@+id/btnApplyDpi"
+                style="@style/BtnPrimary"
+                android:layout_marginTop="10dp"
+                android:text="应用 DPI" />
+            <TextView
+                android:id="@+id/btnResetDpi"
+                style="@style/BtnOutline"
+                android:layout_marginTop="8dp"
+                android:text="重置 DPI" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/Card">
+            <TextView
+                style="@style/CardLabel"
+                android:text="屏幕旋转" />
+            <TextView
+                android:id="@+id/tvRotation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="当前角度：—"
+                android:textColor="@color/text_main"
+                android:textSize="14sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/btnRot0"
+                    style="@style/BtnOutline"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="0°" />
+                <TextView
+                    android:id="@+id/btnRot90"
+                    style="@style/BtnOutline"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:text="90°" />
+                <TextView
+                    android:id="@+id/btnRot180"
+                    style="@style/BtnOutline"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:text="180°" />
+                <TextView
+                    android:id="@+id/btnRot270"
+                    style="@style/BtnOutline"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:text="270°" />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/btnRotReset"
+                style="@style/BtnPrimary"
+                android:layout_marginTop="8dp"
+                android:text="重置（恢复自动旋转）" />
+            <TextView
+                android:id="@+id/btnRotSwap"
+                style="@style/BtnOutline"
+                android:layout_marginTop="8dp"
+                android:visibility="gone"
+                android:text="横竖屏切换（对调虚拟屏宽高）" />
+            <TextView
+                android:id="@+id/tvRotHint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/warn"
+                android:textSize="12sp"
+                android:visibility="gone" />
+            <TextView
+                android:id="@+id/tvRotForce"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="忽略应用方向请求：—"
+                android:textColor="@color/text_main"
+                android:textSize="13sp" />
+            <TextView
+                android:id="@+id/btnRotForce"
+                style="@style/BtnOutline"
+                android:layout_marginTop="8dp"
+                android:text="忽略应用方向请求（切换）" />
+            <TextView
+                style="@style/CardHint"
+                android:text="Android 12+：cmd window user-rotation -d N lock X / free。Android 11：cmd window set-user-rotation lock -d N X（-d 在模式之后，顺序写错会被当成模式而报错）。两者都能精确作用到选中那一块屏，不会误动物理屏。虚拟屏上应用自己请求横竖屏时会盖掉锁定角度，开启「忽略应用方向请求」可强制锁死；「横竖屏切换」是另一件事，它真的改变屏幕的长宽比。" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/Card">
+            <TextView
+                style="@style/CardLabel"
+                android:text="各屏参数详情（全部显示屏，不只是选中的那块）" />
+            <TextView
+                android:id="@+id/btnDispParams"
+                style="@style/BtnOutline"
+                android:text="刷新各屏参数" />
+            <TextView
+                android:id="@+id/tvDispParams"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_input"
+                android:fontFamily="monospace"
+                android:minHeight="60dp"
+                android:padding="10dp"
+                android:text="尚未加载"
+                android:textColor="@color/text_main"
+                android:textSize="11sp" />
+            <TextView
+                style="@style/CardHint"
+                android:text="逐屏读出：物理尺寸与密度（init=）、wm size/density 覆盖值（base=，未覆盖显示「无」）、应用可用区域（app=）、应用可缩放范围（rng=，超出会出现黑边）、旋转模式（mUserRotationMode）、是否忽略应用方向请求（mFixedToUserRotation）、该屏当前前台应用（mFocusedApp）。旋转角与逻辑尺寸取 DisplayFrames —— overlay 虚拟屏的 mViewports.orientation 恒为 0，不可用。" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/Card">
+            <TextView
+                style="@style/CardLabel"
+                android:text="系统栏控制" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/btnHideStatus"
+                    style="@style/BtnOutline"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="隐藏状态栏" />
+                <TextView
+                    android:id="@+id/btnHideNav"
+                    style="@style/BtnOutline"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:text="隐藏导航栏" />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/btnShowBars"
+                style="@style/BtnOutline"
+                android:layout_marginTop="8dp"
+                android:text="显示状态栏 / 导航栏（恢复）" />
+            <TextView
+                style="@style/CardHint"
+                android:text="通过 policy_control 沉浸模式实现，Android 11 及以下完全生效；部分 12+ 系统该开关被谷歌移除，若无效请用重置恢复。" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/Card">
+            <TextView
+                style="@style/CardLabel"
+                android:text="显示屏列表 (DisplayMode)" />
+            <TextView
+                android:id="@+id/btnList"
+                style="@style/BtnOutline"
+                android:text="刷新显示屏列表" />
+            <TextView
+                android:id="@+id/tvList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_input"
+                android:fontFamily="monospace"
+                android:minHeight="60dp"
+                android:padding="10dp"
+                android:text="尚未加载"
+                android:textColor="@color/text_main"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg"
+    android:fillViewport="true"
+    android:padding="14dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout style="@style/Card">
+            <TextView
+                style="@style/CardLabel"
+                android:text="当前调试地址" />
+            <TextView
+                android:id="@+id/tvAddr"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:text="—"
+                android:textColor="@color/text_main"
+                android:textSize="17sp" />
+            <TextView
+                android:id="@+id/tvNet"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="网络：—"
+                android:textColor="@color/text_main"
+                android:textSize="13sp" />
+            <TextView
+                android:id="@+id/tvLastFix"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="上次固定：无记录"
+                android:textColor="@color/text_main"
+                android:textSize="13sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/btnCopyAddr"
+                    style="@style/BtnOutline"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="复制地址" />
+                <TextView
+                    android:id="@+id/btnBroadcast"
+                    style="@style/BtnOutline"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:text="立即广播一次" />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/tvBroadcast"
+                style="@style/CardHint"
+                android:text="广播：发一条 ADB_ADDRESS 广播，并把 ip:端口 注册为局域网 mDNS 服务（_adb._tcp），方便同网段设备发现。再点一次停止。" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/Card">
+            <TextView
+                style="@style/CardLabel"
+                android:text="自动广播地址" />
+            <TextView
+                android:id="@+id/btnAutoBroadcast"
+                style="@style/BtnOutline"
+                android:text="自动广播地址：关" />
+            <TextView
+                android:id="@+id/tvAutoBroadcast"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_input"
+                android:fontFamily="monospace"
+                android:minHeight="48dp"
+                android:padding="10dp"
+                android:text="尚未广播"
+                android:textColor="@color/text_main"
+                android:textSize="12sp" />
+            <TextView
+                style="@style/CardHint"
+                android:text="开启后做三件事：① 立刻广播一次；② 把 ip:端口 注册成局域网 mDNS 服务 _adb._tcp；③ 每 5 分钟自动重发一次，并在[固定为 5555] / [强制开启无线调试]成功后立刻补发，开机后自动恢复。" />
+            <TextView
+                style="@style/CardHint"
+                android:text="广播 Action：com.vscreen.toolbox.ADB_ADDRESS ┃ extras：ip / port / addr（ip:端口）/ cmd（adb connect ip:端口）/ time / source（手动|开机|端口固定后|无线调试开启后|周期）。Tasker、MacroDroid 建一个「接收 Intent」填这个 Action 就能直接拿 cmd 去执行；Termux 需装 termux-api 后监听广播。" />
+            <TextView
+                style="@style/CardHint"
+                android:text="边界：mDNS 注册随 app 进程存活，进程被系统回收就断，下一次周期闹钟会补注册；doze 下周期会被推迟，不保证严格 5 分钟。换网段不用重新注册 mDNS（它应答的是设备当前地址），但 Intent 接收方要等下一个周期才拿到新 IP。" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/Card">
+            <TextView
+                style="@style/CardLabel"
+                android:text="特权通道" />
+            <TextView
+                android:id="@+id/tvPrivShizuku"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:text="Shizuku：检测中…"
+                android:textColor="@color/text_main"
+                android:textSize="13sp" />
+            <TextView
+                android:id="@+id/tvPrivDhizuku"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:fontFamily="monospace"
+                android:text="Dhizuku：检测中…"
+                android:textColor="@color/text_main"
+                android:textSize="13sp" />
+            <TextView
+                android:id="@+id/tvPrivRoot"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:fontFamily="monospace"
+                android:text="Root：检测中…"
+                android:textColor="@color/text_main"
+                android:textSize="13sp" />
+            <TextView
+                style="@style/CardHint"
+                android:text="Shizuku 以 shell(uid 2000) 运行，可读地址、保持 ADB 开启、写 service.adb.tcp.port；但 stop/start adbd 只有 root 能做（shell 执行返回 Must be root），所以「固定 5555」是否立刻生效取决于本机有没有 root。root 通道由[授权检查]页的第 ④ 张卡片负责探测与授权。" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/Card">
+            <TextView
+                style="@style/CardLabel"
+                android:text="当前 adb TCP 状态" />
+            <TextView
+                android:id="@+id/tvPort"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:text="—"
+                android:textColor="@color/text_main"
+                android:textSize="14sp" />
+            <TextView
+                android:id="@+id/btnRefreshPort"
+                style="@style/BtnOutline"
+                android:layout_marginTop="10dp"
+                android:text="刷新状态" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/Card">
+            <TextView
+                style="@style/CardLabel"
+                android:text="固定无线调试端口" />
+            <TextView
+                android:id="@+id/btnFix5555"
+                style="@style/BtnPrimary"
+                android:text="固定为 5555" />
+            <TextView
+                android:id="@+id/btnRestore"
+                style="@style/BtnOutline"
+                android:layout_marginTop="8dp"
+                android:text="恢复默认（关闭 TCP）" />
+            <TextView
+                style="@style/CardHint"
+                android:text="执行 setprop service.adb.tcp.port 5555 并重启 adbd。重启 adbd 时当前 adb 连接会闪断几秒，属正常现象。" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/Card">
+            <TextView
+                style="@style/CardLabel"
+                android:text="强制开启无线调试（一键）" />
+            <TextView
+                android:id="@+id/tvForceWifi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_input"
+                android:fontFamily="monospace"
+                android:minHeight="48dp"
+                android:padding="10dp"
+                android:text="尚未检测"
+                android:textColor="@color/text_main"
+                android:textSize="12sp" />
+            <TextView
+                android:id="@+id/btnForceWifiOn"
+                style="@style/BtnPrimary"
+                android:layout_marginTop="10dp"
+                android:text="强制开启无线调试" />
+            <TextView
+                android:id="@+id/btnForceWifiOff"
+                style="@style/BtnOutline"
+                android:layout_marginTop="8dp"
+                android:text="关闭无线调试" />
+            <TextView
+                android:id="@+id/btnForceWifiCheck"
+                style="@style/BtnOutline"
+                android:layout_marginTop="8dp"
+                android:text="刷新无线调试状态" />
+            <TextView
+                android:id="@+id/btnOpenDevOpt"
+                style="@style/BtnOutline"
+                android:layout_marginTop="8dp"
+                android:text="打开开发者选项（无线调试 / 配对码）" />
+            <TextView
+                style="@style/CardHint"
+                android:text="Android 11+ 上无线调试是两套并存的机制：① 传统明文端口（默认 5555，电脑直接 adb connect IP:5555）；② 系统无线调试（TLS 端口，每次开启端口号都不同，已授权过的电脑可直接连，新电脑需用配对码）。本操作会把 adb_enabled、无线调试开关、开发者选项一并置为开启，并写入 service.adb.tcp.port=5555。" />
+            <TextView
+                style="@style/CardHint"
+                android:text="注：写入属性后需要 adbd 重新读取才生效，而 uid 2000(shell) 无权 stop/start adbd。本机有 root 时，本操作会直接用 root 重启 adbd 使其当场生效；没有 root 则需重新插拔一次 USB 线（或由电脑执行 adb tcpip 5555）来让 adbd 重启。root 通道由[授权检查]页第 ④ 张卡片负责探测与授权。" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/Card">
+            <TextView
+                style="@style/CardLabel"
+                android:text="adbd 实际监听端口（排除仅本机）" />
+            <TextView
+                android:id="@+id/tvListen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_input"
+                android:fontFamily="monospace"
+                android:minHeight="48dp"
+                android:padding="10dp"
+                android:text="尚未检测"
+                android:textColor="@color/text_main"
+                android:textSize="12sp" />
+            <TextView
+                android:id="@+id/btnListen"
+                style="@style/BtnOutline"
+                android:layout_marginTop="10dp"
+                android:text="检测监听端口" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/Card">
+            <TextView
+                style="@style/CardLabel"
+                android:text="mDNS 发现无线调试服务 (_adb._tcp)" />
+            <TextView
+                android:id="@+id/btnMdns"
+                style="@style/BtnPrimary"
+                android:text="开始发现（5 秒）" />
+            <TextView
+                android:id="@+id/tvMdns"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_input"
+                android:fontFamily="monospace"
+                android:minHeight="48dp"
+                android:padding="10dp"
+                android:text="尚未发现"
+                android:textColor="@color/text_main"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/Card">
+            <TextView
+                style="@style/CardLabel"
+                android:text="开机自动固定" />
+            <TextView
+                android:id="@+id/btnAutostart"
+                style="@style/BtnOutline"
+                android:text="开机自动固定：关" />
+            <TextView
+                style="@style/CardHint"
+                android:text="开机完成后自动执行一次端口固定（需要开机后 Shizuku 服务已启动且已授权）。" />
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>

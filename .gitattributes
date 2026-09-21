@@ -1,0 +1,13 @@
+# 统一换行符，避免 Windows 下提交把 shell 脚本带成 CRLF
+* text=auto eol=lf
+
+# Gradle Wrapper 必须保持 LF，否则 Linux/macOS 上 ./gradlew 会报 bad interpreter
+gradlew text eol=lf
+*.bat text eol=crlf
+
+# 二进制文件不做换行转换
+*.png binary
+*.jpg binary
+*.jar binary
+*.apk binary
+*.keystore binary

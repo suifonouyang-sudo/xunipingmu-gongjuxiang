@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg"
+    android:fillViewport="true"
+    android:padding="14dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout style="@style/Card">
+            <TextView
+                style="@style/CardLabel"
+                android:text="Shizuku 授权状态" />
+            <TextView
+                android:id="@+id/tvShizuku"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="检查中…"
+                android:textColor="@color/text_main"
+                android:textSize="14sp" />
+            <TextView
+                android:id="@+id/btnShizuku"
+                style="@style/BtnPrimary"
+                android:layout_marginTop="10dp"
+                android:text="授权 / 检查连接" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/Card">
+            <TextView
+                style="@style/CardLabel"
+                android:text="① 创建 / 销毁虚拟屏" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <EditText
+                    android:id="@+id/etWidth"
+                    style="@style/EtNum"
+                    android:layout_weight="3"
+                    android:hint="宽 1080" />
+                <TextView
+                    style="@style/EtSep"
+                    android:text="×" />
+                <EditText
+                    android:id="@+id/etHeight"
+                    style="@style/EtNum"
+                    android:layout_weight="3"
+                    android:hint="高 1920" />
+                <TextView
+                    style="@style/EtSep"
+                    android:text="/" />
+                <EditText
+                    android:id="@+id/etDpi"
+                    style="@style/EtNum"
+                    android:layout_weight="2"
+                    android:hint="DPI" />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/btnCreate"
+                style="@style/BtnPrimary"
+                android:layout_marginTop="10dp"
+                android:text="创建虚拟屏" />
+            <TextView
+                android:id="@+id/btnDestroy"
+                style="@style/BtnOutline"
+                android:layout_marginTop="8dp"
+                android:text="销毁全部虚拟屏" />
+            <TextView
+                android:id="@+id/tvScreenState"
+                style="@style/CardHint"
+                android:text="当前虚拟屏：未知" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/Card">
+            <TextView
+                style="@style/CardLabel"
+                android:text="② 启动应用到虚拟屏" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <EditText
+                    android:id="@+id/etPackage"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_input"
+                    android:hint="包名"
+                    android:inputType="text"
+                    android:minHeight="44dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:textSize="13sp" />
+                <TextView
+                    android:id="@+id/btnPickApp"
+                    style="@style/BtnOutline"
+                    android:layout_width="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:minWidth="80dp"
+                    android:text="选应用" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
+                <EditText
+                    android:id="@+id/etDisplayId"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_input"
+                    android:hint="display id（留空=自动检测虚拟屏）"
+                    android:inputType="number"
+                    android:minHeight="44dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:textSize="13sp" />
+                <TextView
+                    android:id="@+id/btnDetect"
+                    style="@style/BtnOutline"
+                    android:layout_width="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:minWidth="80dp"
+                    android:text="检测" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/btnScreenAuto"
+                    style="@style/BtnOutline"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="启动屏：自动（虚拟屏）" />
+                <TextView
+                    android:id="@+id/btnScreenPhys"
+                    style="@style/BtnOutline"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:text="物理屏 (display 0)" />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/btnLaunch"
+                style="@style/BtnPrimary"
+                android:layout_marginTop="10dp"
+                android:text="启动到虚拟屏" />
+            <TextView
+                android:id="@+id/btnLaunchFallbackP"
+                style="@style/BtnOutline"
+                android:layout_marginTop="8dp"
+                android:text="兜底启动（-p 按包名）" />
+            <TextView
+                android:id="@+id/btnPinApp"
+                style="@style/BtnOutline"
+                android:layout_marginTop="8dp"
+                android:text="固定应用（先停止再锁定到该屏）" />
+            <TextView
+                android:id="@+id/btnLaunchHome"
+                style="@style/BtnOutline"
+                android:layout_marginTop="8dp"
+                android:text="把桌面启动到虚拟屏（固定虚拟主页）" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/Card">
+            <TextView
+                style="@style/CardLabel"
+                android:text="③ 应用列表（左边用户应用 / 右边系统应用，点应用填包名）" />
+            <EditText
+                android:id="@+id/etAppFilter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_input"
+                android:hint="搜索 应用名 / 包名（左右两栏同时过滤）"
+                android:inputType="text"
+                android:minHeight="44dp"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:textSize="13sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/btnReloadApps"
+                    style="@style/BtnOutline"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="读取应用列表" />
+                <TextView
+                    android:id="@+id/tvAppCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="尚未读取"
+                    android:textColor="@color/text_sub"
+                    android:textSize="12sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/tvUserHead"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:paddingBottom="6dp"
+                    android:text="用户应用"
+                    android:textColor="@color/text_sub"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/tvSysHead"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:paddingBottom="6dp"
+                    android:text="系统应用"
+                    android:textColor="@color/text_sub"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:orientation="horizontal">
+                <ListView
+                    android:id="@+id/lvAppsUser"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_input"
+                    android:divider="@color/divider"
+                    android:dividerHeight="1dp"
+                    android:nestedScrollingEnabled="true"
+                    android:scrollbars="vertical" />
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginEnd="6dp"
+                    android:background="@color/divider" />
+                <ListView
+                    android:id="@+id/lvAppsSys"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_input"
+                    android:divider="@color/divider"
+                    android:dividerHeight="1dp"
+                    android:nestedScrollingEnabled="true"
+                    android:scrollbars="vertical" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout style="@style/Card">
+            <TextView
+                style="@style/CardLabel"
+                android:text="④ 后台管理" />
+            <TextView
+                android:id="@+id/btnListTasks"
+                style="@style/BtnOutline"
+                android:text="枚举指定屏上运行的应用" />
+            <TextView
+                android:id="@+id/tvTasks"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_input"
+                android:fontFamily="monospace"
+                android:minHeight="56dp"
+                android:padding="10dp"
+                android:text="尚未加载"
+                android:textColor="@color/text_main"
+                android:textSize="12sp" />
+            <TextView
+                android:id="@+id/btnForceStop"
+                style="@style/BtnOutline"
+                android:layout_marginTop="10dp"
+                android:text="强制停止输入的应用" />
+            <TextView
+                android:id="@+id/btnKillAll"
+                style="@style/BtnOutline"
+                android:layout_marginTop="8dp"
+                android:text="关闭全部后台（排除系统与本应用）" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

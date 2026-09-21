@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg"
+    android:orientation="vertical"
+    android:padding="14dp">
+
+    <!-- 备份方式 -->
+    <LinearLayout style="@style/Card">
+        <TextView
+            style="@style/CardLabel"
+            android:text="备份方式" />
+        <TextView
+            android:id="@+id/tvBackupMode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_input"
+            android:fontFamily="monospace"
+            android:padding="8dp"
+            android:text="检测中…"
+            android:textColor="@color/text_main"
+            android:textSize="12sp" />
+        <EditText
+            android:id="@+id/etBackupDir"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_input"
+            android:fontFamily="monospace"
+            android:hint="备份保存目录（长按恢复默认）"
+            android:inputType="text"
+            android:minHeight="42dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:textColor="@color/text_main"
+            android:textColorHint="@color/text_sub"
+            android:textSize="13sp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/btnBackupWithData"
+                style="@style/BtnMini"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_seg"
+                android:gravity="center"
+                android:text="含应用数据"
+                android:textColor="@drawable/seg_text_color" />
+            <TextView
+                android:id="@+id/btnBackupRetest"
+                style="@style/BtnOutline"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:text="重测 root" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- 已安装应用（恢复独立成页后，整块空间都给列表） -->
+    <LinearLayout
+        style="@style/Card"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+            <TextView
+                style="@style/CardLabel"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_marginBottom="0dp"
+                android:text="已安装应用" />
+            <TextView
+                android:id="@+id/btnBackupUserOnly"
+                style="@style/BtnMini"
+                android:background="@drawable/bg_seg"
+                android:text="仅三方"
+                android:textColor="@drawable/seg_text_color" />
+            <TextView
+                android:id="@+id/btnBackupClear"
+                style="@style/BtnMini"
+                android:layout_marginStart="6dp"
+                android:background="@drawable/bg_btn_outline"
+                android:text="清空"
+                android:textColor="@color/text_main" />
+        </LinearLayout>
+        <EditText
+            android:id="@+id/etBackupFilter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_input"
+            android:hint="按应用名 / 包名过滤"
+            android:inputType="text"
+            android:minHeight="40dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:textColor="@color/text_main"
+            android:textColorHint="@color/text_sub"
+            android:textSize="13sp" />
+        <ListView
+            android:id="@+id/lvApps"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="6dp"
+            android:layout_weight="1"
+            android:divider="@null"
+            android:dividerHeight="0dp" />
+        <TextView
+            android:id="@+id/btnBackupRun"
+            style="@style/BtnPrimary"
+            android:layout_marginTop="8dp"
+            android:text="备份选中的应用" />
+    </LinearLayout>
+
+    <!-- 操作结果 -->
+    <LinearLayout style="@style/Card">
+        <TextView
+            android:id="@+id/tvBackupResult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_input"
+            android:fontFamily="monospace"
+            android:maxLines="9"
+            android:minHeight="44dp"
+            android:padding="8dp"
+            android:scrollbars="vertical"
+            android:text="—"
+            android:textColor="@color/text_main"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+</LinearLayout>

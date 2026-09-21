@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/bg">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/primary"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="18dp"
+        android:paddingTop="12dp"
+        android:paddingEnd="12dp"
+        android:paddingBottom="12dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/app_name"
+            android:textColor="#FFFFFFFF"
+            android:textSize="19sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/btnFontMinus"
+            style="@style/FontStepBtn"
+            android:text="A-" />
+
+        <TextView
+            android:id="@+id/tvFontScale"
+            style="@style/FontScaleLabel"
+            android:text="100%" />
+
+        <TextView
+            android:id="@+id/btnFontPlus"
+            style="@style/FontStepBtn"
+            android:text="A+" />
+    </LinearLayout>
+
+    <!-- 5 个标签在大字号下会超出屏宽，改成可横向滚动，避免文字被截断 -->
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:id="@+id/tabBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp">
+
+            <TextView
+                android:id="@+id/tab0"
+                style="@style/TabItem"
+                android:text="@string/tab_auth" />
+
+            <TextView
+                android:id="@+id/tab1"
+                style="@style/TabItem"
+                android:text="@string/tab_vscreen" />
+
+            <TextView
+                android:id="@+id/tab2"
+                style="@style/TabItem"
+                android:text="@string/tab_display" />
+
+            <TextView
+                android:id="@+id/tab3"
+                style="@style/TabItem"
+                android:text="@string/tab_portfixer" />
+
+            <TextView
+                android:id="@+id/tab4"
+                style="@style/TabItem"
+                android:text="@string/tab_install" />
+
+            <TextView
+                android:id="@+id/tab5"
+                style="@style/TabItem"
+                android:text="@string/tab_backup" />
+
+            <TextView
+                android:id="@+id/tab6"
+                style="@style/TabItem"
+                android:text="@string/tab_restore" />
+
+            <TextView
+                android:id="@+id/tab7"
+                style="@style/TabItem"
+                android:text="@string/tab_log" />
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+</LinearLayout>

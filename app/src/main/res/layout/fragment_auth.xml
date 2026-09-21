@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg"
+    android:fillViewport="true"
+    android:padding="14dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout style="@style/Card">
+            <TextView
+                style="@style/CardLabel"
+                android:text="授权总览" />
+            <TextView
+                android:id="@+id/tvAuthSummary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_main"
+                android:textSize="15sp" />
+            <TextView
+                android:id="@+id/btnAuthRecheck"
+                style="@style/BtnPrimary"
+                android:layout_marginTop="10dp"
+                android:text="重新检查全部" />
+            <TextView
+                style="@style/CardHint"
+                android:text="把本工具运行所需的每一项权限、授权与系统开关集中列出来并逐项体检，红 / 黄项都附了跳转到对应系统设置页的入口。各项含义：Shizuku 是执行底座（提供 shell 身份），应用权限决定能否保活与提醒，系统开关影响 Shizuku 自身的启动方式。" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/Card">
+            <TextView
+                style="@style/CardLabel"
+                android:text="① Shizuku —— 本工具全部功能的执行底座" />
+            <LinearLayout
+                android:id="@+id/lvAuthShizuku"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+            <TextView
+                android:id="@+id/btnAuthRequest"
+                style="@style/BtnPrimary"
+                android:layout_marginTop="10dp"
+                android:text="向 Shizuku 申请授权" />
+            <TextView
+                android:id="@+id/btnAuthOpenShizuku"
+                style="@style/BtnOutline"
+                android:layout_marginTop="8dp"
+                android:text="打开 Shizuku 应用" />
+            <TextView
+                style="@style/CardHint"
+                android:text="Shizuku 未运行时，需要先在 Shizuku 里启动服务（root 或无线调试方式）；服务起来后回到本页点「申请授权」即可。第一行是服务是否活着，第二行是本应用是否被授权，第四行是实跑一条 id 命令的真实结果——前三行是「看起来如何」，这一行才是「真的能用」。Shizuku 服务身份为 uid=2000(shell) 表示走 adb / 无线调试，uid=0(root) 表示走 root。" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/Card">
+            <TextView
+                style="@style/CardLabel"
+                android:text="② 应用权限 —— 保活、提醒与叠加层" />
+            <LinearLayout
+                android:id="@+id/lvAuthApp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+            <TextView
+                android:id="@+id/btnAuthAppDetails"
+                style="@style/BtnOutline"
+                android:layout_marginTop="10dp"
+                android:text="打开本应用的系统设置页" />
+            <TextView
+                style="@style/CardHint"
+                android:text="通知权限：Android 13+ 需要手动授予，否则后台运行与端口固定的提醒看不到。悬浮窗权限：本工具自身当前不画悬浮窗，但部分 ROM 会据此限制后台弹窗，可按需开启。忽略电池优化：虚拟屏上挂机的应用最容易被省电策略杀掉，加入白名单能显著提升存活率。后台自启动 / 省电策略是各家 ROM 的私有开关，没有统一接口，只能从应用详情页进去手动设置。" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/Card">
+            <TextView
+                style="@style/CardLabel"
+                android:text="③ 系统开关 —— 影响 Shizuku 与无线调试（经 Shizuku 读取）" />
+            <LinearLayout
+                android:id="@+id/lvAuthSys"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+            <TextView
+                android:id="@+id/btnAuthSysRefresh"
+                style="@style/BtnOutline"
+                android:layout_marginTop="10dp"
+                android:text="重新读取系统开关" />
+            <TextView
+                style="@style/CardHint"
+                android:text="ADB 调试：关掉后无线调试也无法开启，Shizuku 会随之失效。无线调试：Android 11+ 用无线调试启动 Shizuku 时必须是开启状态。" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/Card">
+            <TextView
+                style="@style/CardLabel"
+                android:text="④ Root 通道 —— 可选增强，有 root 时自动启用" />
+            <LinearLayout
+                android:id="@+id/lvAuthRoot"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+            <TextView
+                android:id="@+id/btnAuthRootTest"
+                style="@style/BtnPrimary"
+                android:layout_marginTop="10dp"
+                android:text="检测 root 并申请授权" />
+            <TextView
+                android:id="@+id/btnAuthRootClear"
+                style="@style/BtnOutline"
+                android:layout_marginTop="8dp"
+                android:text="清除探测缓存并重新检测" />
+            <TextView
+                style="@style/CardHint"
+                android:text="本工具的第二条特权通道，与 Shizuku 并列互补。有 root 时能做的事严格多于 shell：stop adbd / start adbd 只有 root 能做（shell 执行返回 Must be root），这正是「真正固定 5555 明文端口」一直缺的那一环；无线调试开关、系统级读写也都更彻底。\n\nroot 通道不依赖 Shizuku 服务，是直接从本应用进程 fork su 执行的，所以 Shizuku 未启动时它反而更可靠。\n\n本工具不做任何提权：设备没有 su 时这里只会如实显示「未 root」，属正常情况。点上方按钮会真的执行一次 su -c id，首次调用 root 管理器会弹出授权框，点[允许]即可。" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/Card">
+            <TextView
+                style="@style/CardLabel"
+                android:text="运行环境" />
+            <TextView
+                android:id="@+id/tvAuthDevice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_input"
+                android:fontFamily="monospace"
+                android:minHeight="60dp"
+                android:padding="10dp"
+                android:text="—"
+                android:textColor="@color/text_main"
+                android:textSize="11sp" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

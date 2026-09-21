@@ -1,0 +1,22 @@
+# Gradle
+.gradle/
+build/
+app/build/
+
+# 本机 SDK 路径，不应进入版本库
+local.properties
+
+# IDE
+.idea/
+*.iml
+*.hprof
+
+# 签名文件
+*.jks
+*.keystore
+
+# 系统文件
+.DS_Store
+Thumbs.db
+*.log
+captures/

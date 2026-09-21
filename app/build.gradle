@@ -1,0 +1,55 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.vscreen.toolbox'
+    compileSdk 35
+
+    defaultConfig {
+        applicationId "com.vscreen.toolbox"
+        minSdk 24
+        targetSdk 35
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    // 三个待整合 APK 体积较大，放 assets 无需压缩
+    androidResources {
+        noCompress 'apk'
+    }
+
+    lint {
+        abortOnError false
+        checkReleaseBuilds false
+    }
+}
+
+// androidx 传递依赖里混入了旧版 kotlin-stdlib-jdk7/8，会造成重复类冲突
+configurations.all {
+    exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib-jdk7'
+    exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib-jdk8'
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.7.1'
+    implementation 'androidx.activity:activity:1.9.1'
+    implementation 'androidx.fragment:fragment:1.8.9'
+    implementation 'androidx.core:core:1.13.1'
+
+    // Shizuku：以 adb/shell 权限执行系统命令
+    implementation 'dev.rikka.shizuku:api:13.1.5'
+    implementation 'dev.rikka.shizuku:provider:13.1.5'
+    implementation 'dev.rikka.shizuku:aidl:13.1.5'
+}

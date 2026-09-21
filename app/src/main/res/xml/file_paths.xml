@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <!-- LogStore.export 写入 getExternalFilesDir(null)/logs/ -->
+    <external-files-path
+        name="logs"
+        path="logs/" />
+    <files-path
+        name="internal"
+        path="." />
+</paths>

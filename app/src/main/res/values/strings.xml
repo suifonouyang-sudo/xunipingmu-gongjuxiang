@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">虚拟屏工具箱</string>
+
+    <string name="tab_vscreen">虚拟屏</string>
+    <string name="tab_display">虚拟屏控制</string>
+    <string name="tab_portfixer">端口固定</string>
+    <string name="tab_log">日志</string>
+    <string name="tab_auth">授权检查</string>
+    <string name="tab_install">应用安装</string>
+    <string name="tab_backup">应用备份</string>
+    <string name="tab_restore">应用恢复</string>
+
+    <string name="lbl_package">包名</string>
+    <string name="lbl_status">状态</string>
+    <string name="lbl_version">版本</string>
+    <string name="lbl_desc">功能说明</string>
+    <string name="lbl_perm">所需权限</string>
+
+    <string name="status_installed">已安装</string>
+    <string name="status_missing">未安装</string>
+
+    <string name="btn_open">打开</string>
+    <string name="btn_install">安装</string>
+    <string name="btn_reinstall">重装 / 更新</string>
+    <string name="btn_uninstall">卸载</string>
+    <string name="btn_details">应用信息</string>
+    <string name="btn_clear_log">清空</string>
+    <string name="btn_export_log">导出</string>
+    <string name="btn_refresh">刷新</string>
+
+    <string name="log_empty">暂无日志记录</string>
+
+    <string name="tab_display2">虚拟屏控制</string>
+    <string name="lbl_create_screen">创建虚拟屏（模拟辅助显示）</string>
+    <string name="btn_create_screen">创建虚拟屏</string>
+    <string name="btn_destroy_screens">销毁全部虚拟屏</string>
+    <string name="lbl_launch_to_screen">启动应用到虚拟屏</string>
+    <string name="btn_launch_app">启动到虚拟屏</string>
+    <string name="hint_overlay">原理：写入 settings global overlay_display_devices，由系统创建模拟辅助显示屏；应用随即可被启动到该屏后台运行。</string>
+
+    <string name="desc_vscreen">创建并启动虚拟显示屏，让目标应用在独立虚拟屏中运行，适合后台挂机、息屏保活等场景。体积小巧，依赖 Shizuku 授权执行 display 相关系统命令。</string>
+    <string name="desc_display">虚拟屏控制器，提供虚拟显示屏的创建、参数调整与销毁等控制能力，支持分辨率 / DPI 等参数配置，同样基于 Shizuku 权限调用系统接口。</string>
+    <string name="desc_portfixer">将无线调试地址固定为 5555 端口，避免每次重启后 adb 端口随机变化。开机自启前台服务，需 Shizuku 权限配合网络与定位权限。</string>
+
+    <string name="perm_vscreen">Shizuku API_V23、查询全部应用</string>
+    <string name="perm_display">Shizuku API_V23、网络状态、联网</string>
+    <string name="perm_portfixer">Shizuku API、前台服务、开机启动、网络/WiFi、定位、通知</string>
+</resources>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="bg">#FFF5F6F8</color>
+    <color name="surface">#FFFFFFFF</color>
+    <color name="primary">#FF2F6BFF</color>
+    <color name="primary_dark">#FF1B4FD8</color>
+    <color name="text_main">#FF1B1D21</color>
+    <color name="text_sub">#FF6B7280</color>
+    <color name="divider">#FFE6E8EB</color>
+    <color name="ok">#FF16A34A</color>
+    <color name="warn">#FFF59E0B</color>
+    <color name="err">#FFDC2626</color>
+    <color name="tab_bg">#FFECEFF3</color>
+    <color name="log_bg">#FF12161C</color>
+    <color name="log_text">#FFC9D1D9</color>
+</resources>
