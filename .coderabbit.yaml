@@ -1,0 +1,80 @@
+# CodeRabbit 配置 —— 适用于本账号下的 Android/Gradle 项目
+# 放在仓库根目录、提交到默认分支即可生效（下一个 PR 马上生效，无需重启）
+# 参考：https://docs.coderabbit.ai/guides/configure-coderabbit
+
+language: "zh-CN"
+
+tone_instructions: >-
+  直接指出问题并说明为什么，不要客套。不要评论 import 顺序、行宽、空行这类格式问题，
+  这些交给 ktlint/editorconfig 处理。优先关注：空指针与生命周期泄漏、主线程 IO、
+  Shizuku/ADB 权限边界、资源未释放、硬编码密钥、破坏性 API 变更。
+
+reviews:
+  # chill = 只挑 bug / 安全 / 逻辑；assertive = 连风格一起管；followup = 还会回头看旧评论有没有改
+  profile: "chill"
+  request_changes_workflow: false     # 只留评论，不阻塞合并
+  high_level_summary: true
+  review_status: true
+  collapse_walkthrough: true
+  poem: false
+  sequence_diagrams: false
+
+  auto_review:
+    enabled: true
+    drafts: false                     # 草稿 PR 不审
+    ignore_title_keywords:
+      - "WIP"
+      - "DO NOT MERGE"
+      - "chore(release)"
+
+  # 注意：本账号仓库 star 均 < 10，CodeRabbit 不会自动审查公开仓库，
+  # 需要在 PR 里手动触发 —— 评论 @coderabbitai review（全量用 @coderabbitai full review），
+  # 或点状态评论里的 "Trigger review"。这条与本文件无关，是平台规则。
+
+  # 感叹号开头 = 排除，不审这些路径
+  path_filters:
+    - "!**/build/**"                  # Gradle 构建产物
+    - "!**/.gradle/**"
+    - "!**/gradle/wrapper/**"         # gradle-wrapper.jar 等二进制
+    - "!**/*.apk"                     # 仓库里提交的成品包，别审二进制
+    - "!**/*.aab"
+    - "!**/*.jar"
+    - "!**/*.dex"
+    - "!**/*.so"
+    - "!**/*.keystore"
+    - "!**/*.jks"
+    - "!**/libs/**"                   # battery-monitor 这类预编译依赖
+    - "!**/assets/**/*.bin"
+    - "!**/*.min.js"
+    - "!**/package-lock.json"
+    - "!**/yarn.lock"
+
+  path_instructions:
+    - path: "app/src/**/*.kt"
+      instructions: |
+        Kotlin/Android 代码。重点检查：
+        - Activity/Fragment/Service 的生命周期泄漏（未注销的监听器、回调、BroadcastReceiver）
+        - 在主线程做 IO、睡线程、等待 Binder 调用
+        - Shizuku / ADB shell 调用的参数拼接与权限校验是否可被绕过
+        - 虚拟屏（VirtualDisplay）与 MediaProjection 相关资源是否在异常路径上也能释放
+        - 协程作用域泄漏、未捕获异常导致崩溃
+    - path: "app/src/**/*.java"
+      instructions: "同上，并额外注意 static 可变状态、未关闭的 Cursor/Stream、WeakReference 使用是否必要。"
+    - path: "app/src/main/AndroidManifest.xml"
+      instructions: "检查 exported 组件、权限声明是否过宽（尤其 QUERY_ALL_PACKAGES、SYSTEM_ALERT_WINDOW、WRITE_SECURE_SETTINGS）。"
+    - path: "**/*.gradle"
+      instructions: "只关注构建逻辑错误与依赖冲突，不要建议升级版本号。"
+    - path: "tools/**/*.py"
+      instructions: "Python 工具脚本。检查 subprocess 调用的 shell 注入、硬编码路径、未处理的返回码。"
+    - path: "**/*.md"
+      instructions: "文档。只检查是否与代码实际行为矛盾，不要改文风。"
+    - path: "**/test_*.py"
+      instructions: "端到端测试脚本。确认断言真的校验了结果，而不是只跑不验。"
+
+chat:
+  auto_reply: true
+
+# 内置第三方扫描器（需要 Essentials 及以上；OSS 公开仓库走 OSS 档同样可用）
+tools:
+  gitleaks:
+    enabled: true                    # 密钥/凭据泄漏扫描
