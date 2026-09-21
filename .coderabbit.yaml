@@ -71,10 +71,15 @@ reviews:
     - path: "**/test_*.py"
       instructions: "端到端测试脚本。确认断言真的校验了结果，而不是只跑不验。"
 
+  # 反"低质 AI 提交"（Anti-Slop）检测：公开仓库所有档位都可用
+  slop_detection:
+    enabled: true
+
+  # 内置第三方扫描器
+  # ⚠️ v2 配置里 tools 必须挂在 reviews 下；放顶层会因 schema 校验失败导致整份配置被忽略
+  tools:
+    gitleaks:
+      enabled: true                  # 密钥/凭据泄漏扫描（需要 Essentials 及以上；OSS 档同样可用）
+
 chat:
   auto_reply: true
-
-# 内置第三方扫描器（需要 Essentials 及以上；OSS 公开仓库走 OSS 档同样可用）
-tools:
-  gitleaks:
-    enabled: true                    # 密钥/凭据泄漏扫描
