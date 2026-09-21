@@ -1,4 +1,7 @@
-# 虚拟屏工具箱 (VirtualScreenToolbox)
+# 虚拟屏工具箱
+
+> 仓库名 `xunipingmu-gongjuxiang` 是「虚拟屏幕工具箱」的拼音。GitHub 的仓库名字段只接受
+> ASCII 字母/数字/`.`/`-`/`_`，中文会被直接规整掉，所以仓库名只能用拼音，项目正式名称仍是中文。
 
 一台 Android 设备上把「虚拟屏（Virtual Display）」跑起来并管好它的小工具箱：基于
 [Shizuku](https://shizuku.rikka.app/) 拿到 adb/shell 级权限执行系统命令，覆盖从授权检查、
@@ -37,7 +40,7 @@ App 共 8 个页面：
 
 仓库根目录已附带编译好的安装包，不想自己编译的话下载即可：
 
-- **[VirtualScreenToolbox-v1.0-debug.apk](VirtualScreenToolbox-v1.0-debug.apk)**（3.4 MB，debug 签名）
+- **[虚拟屏工具箱-v1.0-debug.apk](虚拟屏工具箱-v1.0-debug.apk)**（3.4 MB，debug 签名）
 
 安装时需在系统里允许「安装未知来源应用」。装完记得先开 Shizuku，再到 **授权检查** 页逐项授权。
 
@@ -59,8 +62,8 @@ App 共 8 个页面：
 项目自带 Gradle Wrapper，克隆后直接构建：
 
 ```bash
-git clone https://github.com/<owner>/VirtualScreenToolbox.git
-cd VirtualScreenToolbox
+git clone https://github.com/suifonouyang-sudo/xunipingmu-gongjuxiang.git
+cd xunipingmu-gongjuxiang
 
 # 指向你自己的 SDK（该文件已在 .gitignore 中，不会入库）
 echo "sdk.dir=/path/to/Android/Sdk" > local.properties
